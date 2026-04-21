@@ -1,0 +1,510 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+}
+
+header,
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #fff;
+  width: 100%;
+}
+
+header {
+  border-bottom: 2px solid #ddd;
+}
+
+footer {
+  border-top: 2px solid #ddd;
+}
+
+footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.disabled-inputs {
+  opacity: 0.5;
+  pointer-events: none;
+
+  span {
+    color: #333 !important;
+  }
+}
+
+main {
+  flex: 1;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for the settings panel */
+.settings {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 2px solid #ccc;
+  z-index: 1;
+}
+
+.settings .header-setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  z-index: 1001;
+}
+
+.settings .header-setting h2 {
+  font-size: 20px;
+}
+
+.settings .header-setting button {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+#settings-popup .popup-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1001;
+}
+
+#settings-popup button {
+  padding: 10px 20px;
+  background-color: orange;
+  border: 2px solid #e67e22;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#settings-popup button:hover {
+  background-color: #e67e22;
+}
+
+.difficulty,
+.word-length,
+.hints,
+.tries {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.difficulty label,
+.word-length label,
+.hints label,
+.tries label {
+  font-weight: bold;
+  flex: 1;
+}
+
+.difficulty select,
+.word-length select,
+.hints select,
+.tries select {
+  padding: 5px;
+  border: 2px solid #ccc;
+  width: 150px;
+  max-width: 100%;
+}
+
+.difficulty select:focus,
+.word-length select:focus,
+.hints select:focus,
+.tries select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.difficulty select:hover,
+.word-length select:hover,
+.hints select:hover,
+.tries select:hover {
+  border-color: #007bff;
+  outline: none;
+}
+
+.difficulty select option,
+.word-length select option,
+.hints select option,
+.tries select option {
+  padding: 5px;
+}
+
+/* Style for the main content */
+.game {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+}
+
+/* Style for the game board */
+.game .gameplay {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.actions button {
+  flex: 1;
+  display: block;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.actions #restart-btn {
+  background-color: #dc3545;
+  border-color: #c82333;
+}
+
+.actions #restart-btn:hover {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+.actions #settings-btn {
+  background-color: #007bff;
+  border-color: #0069d9;
+}
+
+.actions #settings-btn:hover {
+  background-color: #0069d9;
+  border-color: #0069d9;
+}
+
+.actions #instructions-btn {
+  background-color: #28a745;
+  border-color: #1e7e34;
+}
+
+.actions #instructions-btn:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.game #inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ccc;
+  background-color: #f9f9f9;
+  min-width: 300px;
+  overflow: auto;
+}
+
+.game #inputs .inputs-row {
+  display: flex;
+  gap: 10px;
+}
+
+.game #inputs span {
+  font-weight: bold;
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  align-self: center;
+  font-size: 18px;
+  color: #0069d9;
+}
+
+.game #inputs input {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  font-size: 30px;
+  border: 2px solid #ccc;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #fff;
+  outline: none;
+}
+
+.game #inputs input:focus {
+  border-color: #007bff;
+  border-width: 3px;
+}
+
+button {
+  flex: 1;
+  display: block;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  gap: 10px;
+}
+
+#submit-btn {
+  background-color: #28a745;
+  border-color: #1e7e34;
+  flex: 2;
+}
+
+#submit-btn:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+#hint-btn {
+  background-color: #17a2b8;
+  border-color: #117a8b;
+  flex: 1;
+}
+
+#hint-btn:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+}
+
+#hint-btn .hints-num {
+  font-weight: bold;
+}
+
+#hint-btn:hover .hints-num {
+  text-decoration: underline;
+}
+
+.correct-letter-in-correct-position {
+  background-color: #28a745d0 !important;
+  border-color: #1e7e34 !important;
+  color: #fff;
+}
+
+.correct-letter-in-wrong-position {
+  background-color: #ffc107d0 !important;
+  border-color: #e0a800 !important;
+  color: #fff;
+}
+
+.not-in-word {
+  background-color: #6c757dd0 !important;
+  border-color: #5a6268 !important;
+  color: #fff;
+}
+
+/* Style for the instructions */
+ul {
+  list-style: none;
+}
+
+li {
+  margin-bottom: 5px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+li span {
+  font-weight: bold;
+  color: #007bff;
+}
+
+li:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.key-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.key {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+}
+
+.key-info:nth-of-type(1) .key {
+  background-color: #28a745;
+}
+
+.key-info:nth-of-type(2) .key {
+  background-color: #ffc107;
+}
+
+.key-info:nth-of-type(3) .key {
+  background-color: #6c757d;
+}
+
+/* Popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-box {
+  margin: 20px;
+  background: #fff;
+  border: 2px solid #ccc;
+  overflow: hidden;
+  animation: show 0.3s ease;
+}
+
+.popup-header {
+  padding: 15px;
+  background: #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ccc;
+}
+
+.popup-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+}
+
+.popup-body {
+  padding: 20px;
+}
+
+.popup-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  outline: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 30px;
+  padding: 10px;
+  color: #333;
+}
+
+.popup-overlay#win-popup,
+.popup-overlay#lose-popup {
+  .popup-body {
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 20px;
+    font-size: 40px;
+  }
+
+  span {
+    font-size: 20px;
+  }
+
+  .popup-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    outline: none;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 30px;
+    padding: 10px;
+    color: #333;
+  }
+
+  .hints-used-span {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .selected-word-span {
+    font-weight: bold;
+    color: #007bff;
+  }
+}
+
+#win-popup p,
+#win-popup .hints-used-span {
+  color: #1e7e34 !important;
+}
+
+#lose-popup p {
+  color: #c82333;
+}
+
+@keyframes show {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

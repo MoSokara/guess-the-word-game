@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess the Word</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Guess the Word</h1>
+    </header>
+    <main>
+      <div class="game hidden" id="game">
+        <div class="gameplay">
+          <div class="actions">
+            <button id="settings-btn">Setting</button>
+            <button id="restart-btn">Restart</button>
+            <button id="instructions-btn">Instructions</button>
+          </div>
+          <div id="inputs"></div>
+          <div class="submit">
+            <button id="submit-btn">Submit</button>
+            <button id="hint-btn">
+              <span class="hints-num" id="hints-ele">3</span> Hint
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>
+        &copy; 2026 Guess the Word Game. Created by
+        <a href="https://github.com/mosokara" target="_blank">Sokara</a>.
+      </p>
+    </footer>
+
+    <!-- Popup for instructions -->
+    <div class="popup-overlay" id="instructions-popup">
+      <div class="popup-box">
+        <div class="popup-header">
+          <span class="popup-title">Instructions</span>
+          <span class="popup-close">&times;</span>
+        </div>
+        <div class="popup-body">
+          <ul class="instructions" id="instructions">
+            <li class="key-info">
+              <div class="key"></div>
+              <div class="info-text">
+                Correct letter in the correct position
+              </div>
+            </li>
+            <li class="key-info">
+              <div class="key"></div>
+              <div class="info-text">Correct letter in the wrong position</div>
+            </li>
+            <li class="key-info">
+              <div class="key"></div>
+              <div class="info-text">Not in the word</div>
+            </li>
+            <li>
+              Guess the word in
+              <span>"<span id="tries-count">6</span> tries"</span> or less!
+            </li>
+            <li>Use the hints wisely, they are limited & may be stupid!</li>
+            <li>
+              Press the
+              <span>"<span class="hints-num">3</span> Hints"</span> button to
+              get a right letter in the right position.
+            </li>
+            <li>
+              Press the <span>"Submit"</span> button to submit your guess.
+            </li>
+            <li>
+              Press <span>"&lt; left arrow"</span> to focus on the previous
+              letter.
+            </li>
+            <li>
+              Press <span>"&gt; right arrow"</span> to focus on the next letter.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup for settings -->
+    <div class="popup-overlay" id="settings-popup">
+      <div class="popup-box">
+        <div class="popup-header">
+          <span class="popup-title">Settings</span>
+          <span class="popup-close">&times;</span>
+        </div>
+        <div class="popup-body">
+          <div class="difficulty">
+            <label for="difficulty-select">Difficulty:</label>
+            <select id="difficulty-select">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <div class="word-length">
+            <label for="word-length-select">Word Length:</label>
+            <select id="word-length-select">
+              <option value="4">4 Letters</option>
+              <option value="5">5 Letters</option>
+              <option value="6">6 Letters</option>
+            </select>
+          </div>
+          <div class="tries">
+            <label for="tries-select">Tries:</label>
+            <select id="tries-select">
+              <option value="3">3 Tries</option>
+              <option value="5">5 Tries</option>
+              <option value="7">7 Tries</option>
+            </select>
+          </div>
+
+          <button id="play-btn">Play</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup for win message -->
+    <div class="popup-overlay" id="win-popup">
+      <div class="popup-box">
+        <div class="popup-header">
+          <span class="popup-title">Congratulations!</span>
+          <span class="popup-close">&times;</span>
+        </div>
+        <div class="popup-body">
+          <div class="msg">
+            <p>You Win!</p>
+            <span class="hints-used-span"
+              >(By <span id="hints-used">0</span> Hints)</span
+            >
+            <span class="selected-word"
+              >Selected word: <span class="selected-word-span">Word</span></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup for lose message -->
+    <div class="popup-overlay" id="lose-popup">
+      <div class="popup-box">
+        <div class="popup-header">
+          <span class="popup-title">Oh No!</span>
+          <span class="popup-close">&times;</span>
+        </div>
+        <div class="popup-body">
+          <div class="msg">
+            <p>You Lose!</p>
+            <span class="selected-word"
+              >Selected word: <span class="selected-word-span">Word</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- scripts -->
+    <script type="module" src="words.js"></script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
